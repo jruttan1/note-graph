@@ -1,11 +1,15 @@
 import './index.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Notes from './pages/Notes.jsx'
 
 function App() {
     return(
-
-    <div>
-    
-    </div>
+    <BrowserRouter>
+        <Routes>
+            <Route path = '/' element = {<Notes/>}>
+            </Route>
+        </Routes>
+    </BrowserRouter>
 
     )
 }

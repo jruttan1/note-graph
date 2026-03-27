@@ -1,4 +1,3 @@
-import './Note.css'
 import { useState } from 'react'
 import ExpandButton from './ExpandButton'
 
