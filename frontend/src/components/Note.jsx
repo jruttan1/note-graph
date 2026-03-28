@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ExpandButton from './ExpandButton'
+import './Note.css'
 
 function Note({title, content}) { // passing in a notes title and content
 

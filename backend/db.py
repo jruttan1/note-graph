@@ -1,5 +1,4 @@
-from fastapi.params import Depends
-from sqlmodel import Field, AsyncSession, SQLModel, create_async_engine
+from sqlmodel import Field, SQLModel, Session, create_engine
 from datetime import datetime
 
 
@@ -18,12 +17,12 @@ class Note(SQLModel, table=True):
 # Postgres configs
 postgres_url = "postgresql://jack@localhost/silo"
 
-engine = create_async_engine(postgres_url)
+engine = create_engine(postgres_url)
 
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
-async def get_session(): # sqlmodel boilerplate to pass of the session parameter to FastAPI
-    async with AsyncSession(engine) as session:
+def get_session(): # sqlmodel boilerplate to pass of the session parameter to FastAPI
+    with Session(engine) as session:
         yield session

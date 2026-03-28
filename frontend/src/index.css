@@ -1,2 +1,12 @@
+body {
+  background: #1a1a2e;
+  margin: 0;
+  font-family: "Playfair Display", serif
+}
 
-
+.playfair-display {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 3;
+  font-style: normal;
+}
