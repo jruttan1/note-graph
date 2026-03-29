@@ -1,6 +1,7 @@
 from sqlmodel import Field, SQLModel, Session, create_engine
 from datetime import datetime
-
+import os
+from dotenv import load_dotenv
 
 class Note(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -14,9 +15,9 @@ class Note(SQLModel, table=True):
 # the values in that column. This speeds up query performance, especially for large datasets.
 # for this db we likely dont need any indexing but i'll do it for title just to experiment
 
-
 # Postgres configs
-postgres_url = "postgresql://jack@localhost/silo"
+load_dotenv()
+postgres_url = os.getenv('POSTGRES_URL')
 
 engine = create_engine(postgres_url)
 
