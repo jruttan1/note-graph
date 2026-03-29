@@ -4,6 +4,7 @@ import db
 from contextlib import asynccontextmanager
 from schemas import NoteResponse, NoteCreate
 from typing import List
+from tasks import embed_note
 
 
 @asynccontextmanager
@@ -34,6 +35,7 @@ async def get_note_from_id(id: int, session = Depends(db.get_session)):
 @app.post('/note', response_model = NoteResponse)
 async def add_note(note: NoteCreate, session = Depends(db.get_session)):
     note = crud.write_note(note, session)
+    embed_note.delay(note.id) # .delay() dispatched the Celery task asyncronously
     return note
 
 @app.delete('/delete_note/{id}', response_model = NoteResponse)

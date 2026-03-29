@@ -14,12 +14,12 @@ app = Celery("queue", broker=redis_url, backend=redis_url)
 
 @app.task
 def embed_note(id: int) -> NoteResponse:
-    with Session(engine) as session:
+    with Session(engine) as session: # start db session for this task
 
-        note = get_note_from_id(id, session)
-        embedding = create_embedding(note)
-        note.embedding = embedding
-
+        note = get_note_from_id(id, session) # pull the note you wanna update
+        embedding = create_embedding(note) # call create embedding, returns a list of vectors
+        note.embedding = embedding # add it to the note object
+        
         session.add(note)
         session.commit()
         session.refresh(note)
